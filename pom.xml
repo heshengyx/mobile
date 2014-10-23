@@ -72,7 +72,7 @@
 	        <artifactId>spring-data-mongodb</artifactId>
 	        <version>1.6.0.RELEASE</version>
 	    </dependency>
-	    <!-- security -->
+	    <!-- security包 -->
 	    <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
