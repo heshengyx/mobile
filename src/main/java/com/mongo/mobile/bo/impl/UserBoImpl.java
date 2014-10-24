@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import com.mongo.mobile.bo.UserBo;
 import com.mongo.mobile.dao.UserDao;
 import com.mongo.mobile.entity.User;
+import com.mongo.mobile.page.Pagination;
+import com.mongo.mobile.param.UserQueryParam;
 
 @Service
 public class UserBoImpl implements UserBo {
@@ -15,5 +17,9 @@ public class UserBoImpl implements UserBo {
 
 	public void insert(User entity) {
 		userDao.insert(entity);
+	}
+
+	public Pagination<User> list(UserQueryParam param, int pageNo, int pageSize) {
+		return userDao.list(param, pageNo, pageSize);
 	}
 }
