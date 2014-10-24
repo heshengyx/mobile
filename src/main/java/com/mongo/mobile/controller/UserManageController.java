@@ -20,9 +20,10 @@ import com.mongo.mobile.exception.ServiceException;
 public class UserManageController extends BaseController {
 
 	private static Logger logger = Logger.getLogger(UserManageController.class);
+	
 	@Autowired
 	private UserBo userBo;
-	
+
 	@RequestMapping(value="/user/save", method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> save(User user) {
@@ -35,7 +36,7 @@ public class UserManageController extends BaseController {
 			flag = false;
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.error("系统异常：");
+			logger.error("系统异常");
 			flag = false;
 		}
 		map.put("flag", flag);
@@ -45,5 +46,10 @@ public class UserManageController extends BaseController {
 	@RequestMapping("/users")
 	public String list(Model model) {
 		return "manage/user-list";
+	}
+	
+	@RequestMapping("/user/edit")
+	public String edit(Model model) {
+		return "manage/user-edit";
 	}
 }

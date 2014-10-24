@@ -9,14 +9,17 @@
   	<meta name="viewport" content="width=device-width, initial-scale=1.0">
   	<meta name="description" content="">
     <meta name="author" content="">
+    <title><decorator:title default="默认title"/></title>
     
-    <decorator:title default="默认title"/>
     <link rel="stylesheet" href="${contextPath}/css/bootstrap.css">
     <link rel="stylesheet" href="${contextPath}/css/dashboard.css">
+    <script src="${contextPath}/js/jquery.min.js"></script>
+    <script src="${contextPath}/js/bootstrap.min.js"></script>
     <!--[if lt IE 9]>
-      <script src="${contextPath}/js/html5shiv.min.js"></script>
-      <script src="${contextPath}/js/respond.min.js"></script>
+    <script src="${contextPath}/js/html5shiv.min.js"></script>
+    <script src="${contextPath}/js/respond.min.js"></script>
     <![endif]-->
+    <decorator:head/>
   </head>
   
   <body>
@@ -36,7 +39,7 @@
             <li><a href="#">Dashboard</a></li>
             <li><a href="#">Settings</a></li>
             <li><a href="#">Profile</a></li>
-            <li><a href="${contextPath}/logout">Logout</a></li>
+            <li><a href="${contextPath}/logout">退出</a></li>
           </ul>
           <form class="navbar-form navbar-right">
             <input type="text" class="form-control" placeholder="Search...">
@@ -49,7 +52,7 @@
       <div class="row">
       	<div class="col-sm-3 col-md-2 sidebar">
 		  <ul class="nav nav-sidebar">
-		    <li class="active"><a href="#">Overview</a></li>
+		    <li><a href="#">Overview</a></li>
 		    <li><a href="#">Reports</a></li>
 		    <li><a href="#">Analytics</a></li>
 		    <li><a href="#">Export</a></li>
@@ -62,8 +65,8 @@
 		    <li><a href="">More navigation</a></li>
 		  </ul>
 		  <ul class="nav nav-sidebar">
-		    <li><a href="">Nav item again</a></li>
-		    <li><a href="">One more nav</a></li>
+		    <li><a href="${contextPath}/manage/users">用户管理</a></li>
+		    <li><a href="${contextPath}/manage/user/edit">用户新增</a></li>
 		    <li><a href="">Another nav item</a></li>
 		  </ul>
 		</div>
@@ -71,7 +74,5 @@
         <decorator:body />
       </div>
     </div>
-    <script src="${contextPath}/js/jquery.min.js"></script>
-    <script src="${contextPath}/js/bootstrap.min.js"></script>
   </body>
 </html>

@@ -5,6 +5,20 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+/**
+ * 类说明：<br>
+ * 
+ * 
+ * <p>
+ * 详细描述�?br>
+ * 
+ * 
+ * </p>
+ * 
+ * @author 608279 何胜</a>
+ * 
+ *         CreateDate: Aug 20, 2014
+ */
 public class BaseController {
 
 	/**

@@ -44,7 +44,7 @@
 		<filter-class>  
 			com.opensymphony.module.sitemesh.filter.PageFilter  
 		</filter-class>  
-	</filter>  
+	</filter>
 	<filter-mapping>  
 		<filter-name>sitemesh</filter-name>  
 		<url-pattern>/*</url-pattern>  
