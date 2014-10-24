@@ -66,13 +66,13 @@
 			<artifactId>spring-test</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-		<!-- mongodb包 -->
+		<!-- mongodb -->
 		<dependency>
 	        <groupId>org.springframework.data</groupId>
 	        <artifactId>spring-data-mongodb</artifactId>
 	        <version>1.6.0.RELEASE</version>
 	    </dependency>
-	    <!-- security包 -->
+	    <!-- security -->
 	    <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
@@ -104,7 +104,7 @@
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>${slf4j.version}</version>
 		</dependency>
-		<!-- servlet包 -->
+		<!-- servlet -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
