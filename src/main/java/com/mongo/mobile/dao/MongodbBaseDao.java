@@ -67,7 +67,6 @@ public abstract class MongodbBaseDao<T> {
 	 * @return
 	 */
 	public T findAndModify(Query query, Update update) {
-
 		return this.mongoTemplate.findAndModify(query, update, this.getEntityClass());
 	}
 
@@ -98,7 +97,7 @@ public abstract class MongodbBaseDao<T> {
 	 * @param bean
 	 * @return
 	 */
-	public T save(T bean) {
+	public T saveEntity(T bean) {
 		mongoTemplate.save(bean);
 		return bean;
 	}

@@ -15,8 +15,8 @@ public class UserBoImpl implements UserBo {
 	@Autowired 
 	private UserDao userDao;
 
-	public void insert(User entity) {
-		userDao.insert(entity);
+	public User save(User entity) {
+		return userDao.save(entity);
 	}
 
 	public Pagination<User> list(UserQueryParam param, int pageNo, int pageSize) {

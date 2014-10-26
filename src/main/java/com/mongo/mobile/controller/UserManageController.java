@@ -1,8 +1,5 @@
 package com.mongo.mobile.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.mongo.mobile.bo.UserBo;
 import com.mongo.mobile.entity.User;
 import com.mongo.mobile.exception.ServiceException;
+import com.mongo.mobile.exception.ServiceMessage;
 import com.mongo.mobile.page.Pagination;
 import com.mongo.mobile.param.UserQueryParam;
 
@@ -29,21 +27,20 @@ public class UserManageController extends BaseController {
 
 	@RequestMapping(value = "/user/save", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> save(User user) {
-		boolean flag = true;
-		Map<String, Object> map = new HashMap<String, Object>();
+	public ServiceMessage save(User user) {
+		ServiceMessage message = null;
 		try {
-			userBo.insert(user);
+			user = userBo.save(user);
+			message = new ServiceMessage(ServiceMessage.SUCCESS, "保存成功");
 		} catch (ServiceException e) {
 			logger.error(e.getMessage());
-			flag = false;
+			message = new ServiceMessage(ServiceMessage.ERROR, e.getMessage());
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.error("系统异常");
-			flag = false;
+			message = new ServiceMessage(ServiceMessage.ERROR, "系统异常");
 		}
-		map.put("flag", flag);
-		return map;
+		return message;
 	}
 
 	@RequestMapping("/user/edit")
@@ -55,8 +52,9 @@ public class UserManageController extends BaseController {
 	public String list(UserQueryParam param,
 			@RequestParam(required = false, defaultValue = "1") int page,
 			Model model) {
-		Pagination<User> users = userBo.list(param, page, 15);
-		System.out.println(users);
+		Pagination<User> users = userBo.list(param, page, 2);
+		model.addAttribute("users", users);
+		model.addAttribute("param", param);
 		return "manage/user-list";
 	}
 }

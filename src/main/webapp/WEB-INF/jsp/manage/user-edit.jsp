@@ -4,11 +4,13 @@
 <html lang="zh-cn">
   <head>
     <title>用户新增</title>
-    <script src="${contextPath}/js/jquery.validate.min.js"></script>
+    <script src="${ctx}/js/jquery.form.js"></script>
+    <script src="${ctx}/js/jquery.validate.min.js"></script>
   	<script type="text/javascript">
   	<!--
 	$(function() {
-		$("#form").validate({
+		$('#alert').hide();
+		$('#form').validate({
 			rules : {
 				name : {
 					required : true
@@ -20,8 +22,22 @@
 				}
 			},
 			submitHandler : function(form) {
-				alert("submitted");
-				$(form).ajaxSubmit();
+				var options = {
+					url : "${ctx}/manage/user/save",//默认是form action
+					type : "post",
+					dataType : "json",
+					success : function(data) {
+						$('#alert').show();
+						if (data.code == '200') {
+							$('#alert').addClass('alert-success');
+						} else {
+							$('#alert').addClass('alert-danger');
+						}
+						$('#message').html(data.message);
+					}
+				}
+				$(form).ajaxSubmit(options);
+				return false; //不刷新页面 
 			}
 		});
 	});
@@ -33,23 +49,16 @@
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
       <h3 class="page-header">用户新增</h3>
       
-      <form class="form-horizontal" role="form" id="form" method="post" action="#">
+      <div class="alert alert-dismissible" role="alert" id="alert">
+	  	<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	  	<strong></strong> <span id="message"></span>
+	  </div>
+	  
+      <form class="form-horizontal" role="form" id="form" method="post">
       <div class="form-group">
         <label for="inputName" class="col-sm-2 control-label">用户名</label>
         <div class="col-sm-5">
           <input type="text" class="form-control" id="inputName" name="name" autofocus>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="inputAccount" class="col-sm-2 control-label">账号</label>
-        <div class="col-sm-5">
-          <input type="text" class="form-control" id="inputAccount" name="account">
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="inputPassword" class="col-sm-2 control-label">密码</label>
-        <div class="col-sm-5">
-          <input type="password" class="form-control" id="inputPassword" name="password">
         </div>
       </div>
       <div class="form-group">

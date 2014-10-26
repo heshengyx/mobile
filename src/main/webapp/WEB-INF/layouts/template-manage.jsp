@@ -11,13 +11,13 @@
     <meta name="author" content="">
     <title><decorator:title default="默认title"/></title>
     
-    <link rel="stylesheet" href="${contextPath}/css/bootstrap.css">
-    <link rel="stylesheet" href="${contextPath}/css/dashboard.css">
-    <script src="${contextPath}/js/jquery.min.js"></script>
-    <script src="${contextPath}/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="${ctx}/css/bootstrap.css">
+    <link rel="stylesheet" href="${ctx}/css/dashboard.css">
+    <script src="${ctx}/js/jquery.min.js"></script>
+    <script src="${ctx}/js/bootstrap.min.js"></script>
     <!--[if lt IE 9]>
-    <script src="${contextPath}/js/html5shiv.min.js"></script>
-    <script src="${contextPath}/js/respond.min.js"></script>
+    <script src="${ctx}/js/html5shiv.min.js"></script>
+    <script src="${ctx}/js/respond.min.js"></script>
     <![endif]-->
     <decorator:head/>
   </head>
@@ -39,7 +39,7 @@
             <!-- <li><a href="#">Dashboard</a></li>
             <li><a href="#">Settings</a></li>
             <li><a href="#">Profile</a></li> -->
-            <li><a href="${contextPath}/logout">退出</a></li>
+            <li><a href="${ctx}/logout">退出</a></li>
           </ul>
           <form class="navbar-form navbar-right">
             <input type="text" class="form-control" placeholder="Search...">
@@ -60,8 +60,8 @@
 		    <li><a href="">产品新增</a></li>
 		  </ul>
 		  <ul class="nav nav-sidebar">
-		    <li><a href="${contextPath}/manage/users">用户列表</a></li>
-		    <li><a href="${contextPath}/manage/user/edit">用户新增</a></li>
+		    <li><a href="${ctx}/manage/users">用户列表</a></li>
+		    <li><a href="${ctx}/manage/user/edit">用户新增</a></li>
 		  </ul>
 		</div>
         

@@ -9,17 +9,17 @@
     <meta name="description" content="">
     <meta name="author" content="">
 	<title>用户登录</title>
-	<link href="${contextPath}/css/bootstrap.min.css" rel="stylesheet">
-	<link href="${contextPath}/css/login.css" rel="stylesheet">
+	<link href="${ctx}/css/bootstrap.min.css" rel="stylesheet">
+	<link href="${ctx}/css/login.css" rel="stylesheet">
 	<!--[if lt IE 9]>
-      <script src="${contextPath}/js/html5shiv.min.js"></script>
-      <script src="${contextPath}/js/respond.min.js"></script>
+      <script src="${ctx}/js/html5shiv.min.js"></script>
+      <script src="${ctx}/js/respond.min.js"></script>
     <![endif]-->
 </head>
 
 <body>
 	<div class="container">
-      <form action="${contextPath}/j_spring_security_check" method="POST" class="form-signin" role="form">
+      <form action="${ctx}/j_spring_security_check" method="POST" class="form-signin" role="form">
         <h2 class="form-signin-heading">用户登录</h2>
         
         <h5>账号</h5>
