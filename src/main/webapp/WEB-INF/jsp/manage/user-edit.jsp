@@ -6,9 +6,15 @@
     <title>用户新增</title>
     <script src="${ctx}/js/jquery.form.js"></script>
     <script src="${ctx}/js/jquery.validate.min.js"></script>
+    <script src="${ctx}/js/jquery.uploadify.min.js"></script>
   	<script type="text/javascript">
   	<!--
 	$(function() {
+		var url = "${ctx}/manage/user/save";
+		var id = $('#id').val();
+		if (id != "") {
+			url = "${ctx}/manage/user/update";
+		}
 		$('#alert').hide();
 		$('#form').validate({
 			rules : {
@@ -23,7 +29,7 @@
 			},
 			submitHandler : function(form) {
 				var options = {
-					url : "${ctx}/manage/user/save",//默认是form action
+					url : url,//默认是form action
 					type : "post",
 					dataType : "json",
 					success : function(data) {
@@ -47,7 +53,7 @@
   
   <body>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-      <h3 class="page-header">用户新增</h3>
+      <h3 class="page-header">用户编辑</h3>
       
       <div class="alert alert-dismissible" role="alert" id="alert">
 	  	<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
@@ -55,10 +61,11 @@
 	  </div>
 	  
       <form class="form-horizontal" role="form" id="form" method="post">
+      <input type="hidden" id="id" name="id" value="${user.id}">
       <div class="form-group">
         <label for="inputName" class="col-sm-2 control-label">用户名</label>
         <div class="col-sm-5">
-          <input type="text" class="form-control" id="inputName" name="name" autofocus>
+          <input type="text" class="form-control" id="inputName" name="name" value="${user.name}" autofocus>
         </div>
       </div>
       <div class="form-group">

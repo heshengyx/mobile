@@ -11,12 +11,9 @@
   		$('#pagination').addClass("text-right");
 		var options = {
 			bootstrapMajorVersion : 3,
-            currentPage : ${users.pageNo},
+            currentPage : "${users.pageNo}",
             numberOfPages : 5,
-            totalPages : ${users.totalPage},
-            /* pageUrl : function(type, page, current) {
-               return "?page=" + page;
-            } */
+            totalPages : "${users.totalPage}",
             pageUrl : function(type, page, current) {
                 return "javascript:void(0);";
             },
@@ -41,8 +38,8 @@
       	<form class="form-inline" role="form" id="form" method="post" action="${ctx}/manage/users" style="margin-bottom:10px;">
       	   <input type="hidden" id="page" name="page" value="1">
            <div class="form-group">
-		    <label for="name">姓名：</label>
-		    <input type="text" class="form-control" id="name" name="name" value="${param.name}">
+		    <label for="inputName">姓名：</label>
+		    <input type="text" class="form-control" id="inputName" name="name" value="${param.name}">
 		  </div>
 		  <button type="submit" class="btn btn-primary">搜 索</button>
         </form>
@@ -63,7 +60,7 @@
               <td>${user.name}</td>
               <td>ipsum</td>
               <td>dolor</td>
-              <td>修改 删除</td>
+              <td><a href="${ctx}/manage/user/edit/${user.id}">修改</a> <a href="${ctx}/manage/user/delete/${user.id}">删除</a></td>
             </tr>
           	</c:forEach>
           </tbody>

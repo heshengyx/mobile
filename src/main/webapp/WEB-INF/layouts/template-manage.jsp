@@ -53,15 +53,15 @@
       	<div class="col-sm-3 col-md-2 sidebar">
 		  <ul class="nav nav-sidebar">
 		    <li><a href="">客户列表</a></li>
-		    <li><a href="">客户新增</a></li>
+		    <li><a href="">客户编辑</a></li>
 		  </ul>
 		  <ul class="nav nav-sidebar">
 		    <li><a href="">产品列表</a></li>
-		    <li><a href="">产品新增</a></li>
+		    <li><a href="">产品编辑</a></li>
 		  </ul>
 		  <ul class="nav nav-sidebar">
 		    <li><a href="${ctx}/manage/users">用户列表</a></li>
-		    <li><a href="${ctx}/manage/user/edit">用户新增</a></li>
+		    <li><a href="${ctx}/manage/user/edit">用户编辑</a></li>
 		  </ul>
 		</div>
         

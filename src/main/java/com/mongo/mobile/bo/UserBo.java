@@ -7,5 +7,8 @@ import com.mongo.mobile.param.UserQueryParam;
 public interface UserBo {
 
 	User save(User entity);
+	User getById(String id);
+	User delete(String id);
+	void update(User entity);
 	Pagination<User> list(UserQueryParam param, int pageNo, int pageSize);
 }

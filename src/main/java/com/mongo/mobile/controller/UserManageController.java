@@ -4,6 +4,8 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,7 +32,28 @@ public class UserManageController extends BaseController {
 	public ServiceMessage save(User user) {
 		ServiceMessage message = null;
 		try {
-			user = userBo.save(user);
+			if (StringUtils.isEmpty(user.getId())) {
+				user.setId(null);
+				user = userBo.save(user);
+				message = new ServiceMessage(ServiceMessage.SUCCESS, "保存成功");
+			}
+		} catch (ServiceException e) {
+			logger.error(e.getMessage());
+			message = new ServiceMessage(ServiceMessage.ERROR, e.getMessage());
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("系统异常");
+			message = new ServiceMessage(ServiceMessage.ERROR, "系统异常");
+		}
+		return message;
+	}
+	
+	@RequestMapping(value = "/user/update", method = RequestMethod.POST)
+	@ResponseBody
+	public ServiceMessage update(User user) {
+		ServiceMessage message = null;
+		try {
+			userBo.update(user);
 			message = new ServiceMessage(ServiceMessage.SUCCESS, "保存成功");
 		} catch (ServiceException e) {
 			logger.error(e.getMessage());
@@ -42,10 +65,23 @@ public class UserManageController extends BaseController {
 		}
 		return message;
 	}
-
-	@RequestMapping("/user/edit")
+	
+	@RequestMapping(value = "/user/edit")
 	public String edit(Model model) {
 		return "manage/user-edit";
+	}
+
+	@RequestMapping(value = "/user/edit/{id}", method = RequestMethod.GET)
+	public String edit(@PathVariable String id, Model model) {
+		User user = userBo.getById(id);
+		model.addAttribute("user", user);
+		return "manage/user-edit";
+	}
+	
+	@RequestMapping(value = "/user/delete/{id}", method = RequestMethod.GET)
+	public String delete(@PathVariable String id, Model model) {
+		User user = userBo.delete(id);
+		return "redirect:users";
 	}
 
 	@RequestMapping("/users")
