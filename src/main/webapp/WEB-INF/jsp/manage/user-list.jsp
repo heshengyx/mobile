@@ -60,7 +60,7 @@
               <td>${user.name}</td>
               <td>ipsum</td>
               <td>dolor</td>
-              <td><a href="${ctx}/manage/user/edit/${user.id}">修改</a> <a href="${ctx}/manage/user/delete/${user.id}">删除</a></td>
+              <td><a href="${ctx}/manage/user/edit/${user.id}">修改</a> <a href="${ctx}/manage/user/delete/${user.id}" onclick="javascript:return confirm('确定要删除吗?');">删除</a></td>
             </tr>
           	</c:forEach>
           </tbody>

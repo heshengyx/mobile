@@ -4,7 +4,6 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,11 +31,9 @@ public class UserManageController extends BaseController {
 	public ServiceMessage save(User user) {
 		ServiceMessage message = null;
 		try {
-			if (StringUtils.isEmpty(user.getId())) {
-				user.setId(null);
-				user = userBo.save(user);
-				message = new ServiceMessage(ServiceMessage.SUCCESS, "保存成功");
-			}
+			user.setId(null);
+			user = userBo.save(user);
+			message = new ServiceMessage(ServiceMessage.SUCCESS, "保存成功");
 		} catch (ServiceException e) {
 			logger.error(e.getMessage());
 			message = new ServiceMessage(ServiceMessage.ERROR, e.getMessage());

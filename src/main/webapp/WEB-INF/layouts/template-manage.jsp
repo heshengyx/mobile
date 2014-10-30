@@ -39,7 +39,7 @@
             <!-- <li><a href="#">Dashboard</a></li>
             <li><a href="#">Settings</a></li>
             <li><a href="#">Profile</a></li> -->
-            <li><a href="${ctx}/logout">退出</a></li>
+            <li><a href="${ctx}/logout" onclick="javascript:return confirm('确定要退出吗?');">退出</a></li>
           </ul>
           <form class="navbar-form navbar-right">
             <input type="text" class="form-control" placeholder="Search...">
