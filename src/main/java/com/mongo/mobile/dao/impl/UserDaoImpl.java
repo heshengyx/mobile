@@ -11,7 +11,6 @@ import org.springframework.util.StringUtils;
 import com.mongo.mobile.dao.MongodbBaseDao;
 import com.mongo.mobile.dao.UserDao;
 import com.mongo.mobile.entity.User;
-import com.mongo.mobile.exception.ServiceException;
 import com.mongo.mobile.page.Pagination;
 import com.mongo.mobile.param.UserQueryParam;
 

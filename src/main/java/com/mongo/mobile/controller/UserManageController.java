@@ -77,7 +77,7 @@ public class UserManageController extends BaseController {
 	
 	@RequestMapping(value = "/user/delete/{id}", method = RequestMethod.GET)
 	public String delete(@PathVariable String id, Model model) {
-		User user = userBo.delete(id);
+		userBo.delete(id);
 		return "redirect:users";
 	}
 
