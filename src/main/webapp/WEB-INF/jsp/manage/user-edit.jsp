@@ -15,13 +15,14 @@
             //指定swf文件
             'swf': '${ctx}/css/uploadify.swf',
             //后台处理的页面
-            'uploader': 'UploadHandler.ashx',
+            'uploader': '${ctx}/uploadify/upload',
+            'fileObjName': 'file',
             //按钮显示的文字
             'buttonText': '上传图片',
             //显示的高度和宽度，默认 height 30；width 120
             //'height': 15,
             'width': 80,
-            //上传文件的类型  默认为所有文件    'All Files'  ;  '*.*'
+            //上传文件的类型，默认为所有文件    'All Files'  ;  '*.*'
             //在浏览窗口底部的文件类型下拉菜单中显示的文本
             'fileTypeDesc': 'Image Files',
             //允许上传的文件后缀
@@ -29,11 +30,25 @@
             //发送给后台的其他参数通过formData指定
             //'formData': { 'someKey': 'someValue', 'someOtherKey': 1 },
             //上传文件页面中，你想要用来作为文件队列的元素的id, 默认为false  自动生成,  不带#
-            //'queueID': 'fileQueue',
+            'queueID': 'fileQueue',
             //选择文件后自动上传
             'auto': true,
             //设置为true将允许多文件上传
-            'multi': true
+            'multi': true,
+          	//上传成功后的文件，是否在队列中自动删除
+            'removeCompleted': false,
+          	//队列中的每个文件上传完成时触发一次
+            'onUploadComplete': function(file, swfuploadifyQueue) {
+            	//alert( 'id: ' + file.id + ' - 索引: ' + file.index + ' - 文件名: ' + file.name + ' - 文件大小: ' + file.size);
+            },
+          	//上传文件出错是触发（每个出错文件触发一次）
+            'onUploadError': function(file, errorCode, errorMsg, errorString, swfuploadifyQueue) {
+            	
+            },
+          	//上传完成时触发（每个文件触发一次）
+            'onUploadSuccess': function(file, data, response) {
+            	$('#' + file.id).find('.data').html(' - 上传完毕');
+            }
         });
 		var url = "${ctx}/manage/user/save";
 		var id = $('#id').val();
@@ -105,6 +120,7 @@
       <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
           <input type="file" name="uploadify" id="uploadify" />
+          <div id="fileQueue"></div>
         </div>
       </div>
       <div class="form-group">
