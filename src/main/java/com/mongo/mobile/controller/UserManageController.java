@@ -1,5 +1,8 @@
 package com.mongo.mobile.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mongo.mobile.bo.UserBo;
+import com.mongo.mobile.bo.UserDescBo;
 import com.mongo.mobile.entity.User;
+import com.mongo.mobile.entity.UserDesc;
 import com.mongo.mobile.exception.ServiceException;
 import com.mongo.mobile.exception.ServiceMessage;
 import com.mongo.mobile.page.Pagination;
@@ -25,6 +30,9 @@ public class UserManageController extends BaseController {
 
 	@Autowired
 	private UserBo userBo;
+	
+	@Autowired
+	private UserDescBo userDescBo;
 
 	@RequestMapping(value = "/user/save", method = RequestMethod.POST)
 	@ResponseBody
@@ -33,6 +41,13 @@ public class UserManageController extends BaseController {
 		try {
 			user.setId(null);
 			user = userBo.save(user);
+			
+			List<User> users = new ArrayList<User>();
+			users.add(user);
+			UserDesc userDesc = new UserDesc();
+			userDesc.setDesc("DESC");
+			userDesc.setUsers(users);
+			userDescBo.save(userDesc);
 			message = new ServiceMessage(ServiceMessage.SUCCESS, "保存成功");
 		} catch (ServiceException e) {
 			logger.error(e.getMessage());

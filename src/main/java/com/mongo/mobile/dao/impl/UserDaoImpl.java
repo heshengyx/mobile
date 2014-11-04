@@ -57,5 +57,4 @@ public class UserDaoImpl extends MongodbBaseDao<User> implements UserDao {
 		}
 		updateFirst(new Query(Criteria.where("id").is(entity.getId())), update);
 	}
-
 }
