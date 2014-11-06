@@ -1,8 +1,5 @@
 package com.mongo.mobile.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,12 +38,9 @@ public class UserManageController extends BaseController {
 		try {
 			user.setId(null);
 			user = userBo.save(user);
-			
-			List<User> users = new ArrayList<User>();
-			users.add(user);
+
 			UserDesc userDesc = new UserDesc();
 			userDesc.setDesc("DESC");
-			userDesc.setUsers(users);
 			userDescBo.save(userDesc);
 			message = new ServiceMessage(ServiceMessage.SUCCESS, "保存成功");
 		} catch (ServiceException e) {
