@@ -1,6 +1,5 @@
 package com.mongo.mobile.test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
@@ -13,6 +12,7 @@ import com.mongo.mobile.bo.UserDescBo;
 import com.mongo.mobile.entity.User;
 import com.mongo.mobile.entity.UserDesc;
 import com.mongo.mobile.page.Pagination;
+import com.mongo.mobile.param.UserDescQueryParam;
 import com.mongo.mobile.param.UserQueryParam;
 
 public class JunitTest {
@@ -34,20 +34,19 @@ public class JunitTest {
 		try {
 			User user = new User();
 			user.setName("zhangsan");
-			
-			List<UserDesc> userDescs = new ArrayList<UserDesc>();
+			user = userBo.save(user);
+			System.out.println("user================" + user.getId());
 			UserDesc desc1 = new UserDesc();
 			desc1.setDesc("desc1");
-			userDescs.add(desc1);
+			desc1.setUserId(user.getId());
 			userDescBo.save(desc1);
+			System.out.println("desc1================" + desc1.getId());
 			
 			UserDesc desc2 = new UserDesc();
 			desc2.setDesc("desc2");
-			userDescs.add(desc2);
+			desc2.setUserId(user.getId());
 			userDescBo.save(desc2);
-			
-			user.setUserDescs(userDescs);
-			userBo.save(user);
+			System.out.println("desc2================" + desc2.getId());
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -62,9 +61,14 @@ public class JunitTest {
 		List<User> users = user.getDatas();
 		for (User u : users) {
 			System.out.println("Id=" + u.getId() + ",Name=" + u.getName());
-			List<UserDesc> userDescs = u.getUserDescs();
-			for (UserDesc d : userDescs) {
-				System.out.println("Id=" + d.getId() + ",Desc=" + d.getDesc());
+			
+			UserDescQueryParam _param = new UserDescQueryParam();
+			_param.setUserId(u.getId());
+			Pagination<UserDesc> userDesc = userDescBo.list(_param, 1, 100);
+			List<UserDesc> userDescs = userDesc.getDatas();
+			
+			for (UserDesc desc : userDescs) {
+				System.out.println("Id=" + desc.getId() + ",Desc=" + desc.getDesc());
 			}
 		}
 		System.out.println("find2================");

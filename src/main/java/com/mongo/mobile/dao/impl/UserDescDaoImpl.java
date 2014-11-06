@@ -39,6 +39,11 @@ public class UserDescDaoImpl extends MongodbBaseDao<UserDesc> implements UserDes
 			Criteria criteria = Criteria.where("desc").regex("^" + desc);
 			query.addCriteria(criteria);
 		}
+		String userId = param.getUserId();
+		if (!StringUtils.isEmpty(userId)) {
+			Criteria criteria = Criteria.where("userId").is(userId);
+			query.addCriteria(criteria);
+		}
 		return getPage(pageNo, pageSize, query);
 	}
 
