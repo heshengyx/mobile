@@ -7,7 +7,7 @@
     <script src="${ctx}/js/bootstrap-paginator.js"></script>
     <script type="text/javascript">
   	<!--
-  	$(function(){
+  	$(function() {
   		$('#pagination').addClass("text-right");
 		var options = {
 			bootstrapMajorVersion : 3,
@@ -26,6 +26,35 @@
 		//$('#pagination').removeClass("pagination").addClass("text-right");
 		//$('#pagination ul').addClass("pagination").addClass("pagination-sm").css("margin-top", "0px");
   	});
+  	function deleteFun(id) {
+  		if (confirm('确定要删除吗?')) {
+  			/* $.get("${ctx}/manage/user/delete/" + id, function(result){
+  				alert(JSON.stringify(result));
+  				alert(result.message);
+				$('#form').submit();
+  			}); */
+  			$.ajax({
+  			  	url: "${ctx}/manage/user/delete/" + id,
+  			  	type : "get",
+	  			dataType : "json",
+  			  	success: function(result) {
+  			  		$('.modal-body').html(result.message);
+					$('#myModal').modal({
+						backdrop : "static"
+					})
+  					if (result.code == '200') {
+  						$('#btn-confirm').html("确定");
+  						$('#btn-confirm').bind("click",function(){
+  							$('#form').submit();
+  						});
+  					} else {
+  						$('#btn-confirm').html("关闭");
+  						$('#btn-confirm').attr("data-dismiss", "modal");
+  					}
+  	  			}
+  			});
+  		}
+  	}
 	//-->
 	</script>
   </head>
@@ -33,7 +62,22 @@
   <body>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
       <h3 class="page-header">用户管理</h3>
-
+      
+      <div class="modal fade bs-example-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-dialog modal-sm">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span></button>
+		        <h4 class="modal-title" id="myModalLabel">消息</h4>
+		      </div>
+		      <div class="modal-body"></div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-primary" id="btn-confirm">确定</button>
+		      </div>
+		    </div>
+		  </div>
+	  </div>
+	  
       <div class="table-responsive">
       	<form class="form-inline" role="form" id="form" method="post" action="${ctx}/manage/users" style="margin-bottom:10px;">
       	   <input type="hidden" id="page" name="page" value="1">
@@ -60,7 +104,7 @@
               <td>${user.name}</td>
               <td>ipsum</td>
               <td>dolor</td>
-              <td><a href="${ctx}/manage/user/edit/${user.id}">修改</a> <a href="${ctx}/manage/user/delete/${user.id}" onclick="javascript:return confirm('确定要删除吗?');">删除</a></td>
+              <td><a href="${ctx}/manage/user/edit/${user.id}">修改</a> <a href="javascript:void(0);" onclick="javascript:deleteFun('${user.id}');">删除</a></td>
             </tr>
           	</c:forEach>
           </tbody>

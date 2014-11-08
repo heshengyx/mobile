@@ -65,7 +65,6 @@ public class UserManageController extends BaseController {
 			logger.error(e.getMessage());
 			message = new ServiceMessage(ServiceMessage.ERROR, e.getMessage());
 		} catch (Exception e) {
-			e.printStackTrace();
 			logger.error("系统异常");
 			message = new ServiceMessage(ServiceMessage.ERROR, "系统异常");
 		}
@@ -85,9 +84,21 @@ public class UserManageController extends BaseController {
 	}
 	
 	@RequestMapping(value = "/user/delete/{id}", method = RequestMethod.GET)
-	public String delete(@PathVariable String id, Model model) {
-		userBo.delete(id);
-		return "redirect:users";
+	@ResponseBody
+	public ServiceMessage delete(@PathVariable String id) {
+		ServiceMessage message = null;
+		try {
+			User user = userBo.delete(id);
+			if (user != null) {
+				message = new ServiceMessage(ServiceMessage.SUCCESS, "删除成功");
+			} else {
+				message = new ServiceMessage(ServiceMessage.ERROR, "删除失败");
+			}
+		} catch (Exception e) {
+			logger.error("删除失败");
+			message = new ServiceMessage(ServiceMessage.ERROR, "删除失败");
+		}
+		return message;
 	}
 
 	@RequestMapping("/users")

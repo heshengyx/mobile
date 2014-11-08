@@ -72,14 +72,14 @@
 					url : url,//默认是form action
 					type : "post",
 					dataType : "json",
-					success : function(data) {
+					success : function(result) {
 						$('#alert').show();
-						if (data.code == '200') {
+						if (result.code == '200') {
 							$('#alert').addClass('alert-success');
 						} else {
 							$('#alert').addClass('alert-danger');
 						}
-						$('#message').html(data.message);
+						$('#message').html(result.message);
 					}
 				}
 				$(form).ajaxSubmit(options);
