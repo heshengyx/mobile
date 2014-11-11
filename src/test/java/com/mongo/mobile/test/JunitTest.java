@@ -7,26 +7,58 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.mongo.mobile.bo.ManagerBo;
 import com.mongo.mobile.bo.UserBo;
 import com.mongo.mobile.bo.UserDescBo;
+import com.mongo.mobile.entity.Manager;
 import com.mongo.mobile.entity.User;
 import com.mongo.mobile.entity.UserDesc;
 import com.mongo.mobile.page.Pagination;
+import com.mongo.mobile.param.ManagerQueryParam;
 import com.mongo.mobile.param.UserDescQueryParam;
 import com.mongo.mobile.param.UserQueryParam;
+import com.mongo.mobile.util.DateUtil;
 
 public class JunitTest {
 
 	private ApplicationContext ac;
 	private UserBo userBo;
 	private UserDescBo userDescBo;
+	private ManagerBo managerBo;
 	
 	@Before 
     public void setUp() throws Exception { 
         ac = new ClassPathXmlApplicationContext("application-mongo.xml");
         userBo = ac.getAutowireCapableBeanFactory().getBean(UserBo.class);
         userDescBo = ac.getAutowireCapableBeanFactory().getBean(UserDescBo.class);
+        managerBo = ac.getAutowireCapableBeanFactory().getBean(ManagerBo.class);
     }
+	
+	@Test
+	public void testSaveManager() {
+		try {
+			Manager manager = new Manager();
+			manager.setName("admin");
+			manager.setStatus("1");
+			managerBo.save(manager);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testfindManager() {
+		try {
+			ManagerQueryParam param = new ManagerQueryParam();
+			Pagination<Manager> managerPage = managerBo.list(param, 1, 100);
+			List<Manager> managers = managerPage.getDatas();
+			for (Manager manager : managers) {
+				System.out.println("Name=" + manager.getName() + ",Date=" + DateUtil.getDate(manager.getCreateTime()));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 	@Test
 	public void testSave() {

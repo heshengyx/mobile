@@ -235,15 +235,4 @@ public class FileUtil {
 		}
 		return content;
 	}
-
-	public static void main(String[] args) {
-		String s = "com.sfpay.map";
-		
-		s = getStringTokenizer(s, ".", "/");
-		
-		s = System.getProperty("user.dir");
-		System.out.println(FileUtil.class.getResource("/").getFile());
-		System.out.println(new File("/").getAbsolutePath());
-		System.out.println(s);
-	}
 }
