@@ -1,5 +1,7 @@
 package com.mongo.mobile.bo.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -38,5 +40,9 @@ public class UserBoImpl implements UserBo {
 			throw new ServiceException("主键不能为空");
 		}
 		userDao.update(entity);
+	}
+
+	public List<User> list(UserQueryParam param) {
+		return userDao.list(param);
 	}
 }

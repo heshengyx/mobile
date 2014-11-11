@@ -86,6 +86,15 @@ public class JunitTest {
 	}
 	
 	@Test
+	public void testFindUser() {
+		UserQueryParam param = new UserQueryParam();
+		List<User> users = userBo.list(param);
+		for (User u : users) {
+			System.out.println("Id=" + u.getId() + ",Name=" + u.getName());
+		}
+	}
+	
+	@Test
 	public void testFind() {
 		System.out.println("find1================");
 		UserQueryParam param = new UserQueryParam();

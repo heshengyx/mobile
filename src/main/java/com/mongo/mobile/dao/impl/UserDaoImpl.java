@@ -1,5 +1,7 @@
 package com.mongo.mobile.dao.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -56,5 +58,10 @@ public class UserDaoImpl extends MongodbBaseDao<User> implements UserDao {
 			update.set("name", entity.getName());
 		}
 		updateFirst(new Query(Criteria.where("id").is(entity.getId())), update);
+	}
+
+	public List<User> list(UserQueryParam param) {
+		Query query = new Query();
+		return find(query);
 	}
 }
